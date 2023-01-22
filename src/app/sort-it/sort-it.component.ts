@@ -1,13 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-sort-it',
   templateUrl: './sort-it.component.html',
   styleUrls: ['./sort-it.component.css']
 })
-export class SortItComponent implements OnInit {
-  title = 'elvalaszto';
+export class SortItComponent {
 
   @Input()
   public numberOfChallenges: number | undefined;
@@ -20,6 +19,7 @@ export class SortItComponent implements OnInit {
 
   private _words: string[] = [];
 
+  public gameType: string = 'multiple-choice';
   public challenge: string[] = [];
   public challengeOrdered: string[] = [];
   public result: string = '';
@@ -27,14 +27,6 @@ export class SortItComponent implements OnInit {
   public correctGuesses = 0;
   public voted: boolean = false;
   private timeout: any;
-
-  public constructor(private httpClient: HttpClient) {
-
-  }
-
-  ngOnInit() {
-  }
-
 
   private randomIntFromInterval(min: number, max: number): number { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -95,7 +87,32 @@ export class SortItComponent implements OnInit {
   }
 
   public showPercent(actual: number, total: number) {
-
     return total && total > 0 ? actual / total * 100 : 0;
   }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.challenge, event.previousIndex, event.currentIndex);
+  }
+
+  validateOrder() {
+    let correct: boolean = true;
+    for (let i = 0; i < this.challenge.length; i++) {
+      if (this.challenge[i] !== this.challengeOrdered[i]) {
+        correct = false;
+        break;
+      }
+    }
+    if (correct) {
+      this.result = 'helyes';
+      this.correctGuesses++;
+      this.timeout = setTimeout(() => {
+        this.restart();
+      }, 1000);
+    } else {
+      this.result = 'helytelen';
+    }
+    this.totalGuesses++;
+    this.voted = true;
+  }
 }
+

@@ -1,1 +1,7 @@
-<app-multiple-choice [numberOfChallenges]="20" [words]="words"></app-multiple-choice>
+<mat-grid-list cols="2" rowHeight="2:1" *ngIf="!gameType">
+  <mat-grid-tile><button mat-fab color="warn" (click)="gameType = 'multiple-choice'"><mat-icon>check</mat-icon></button></mat-grid-tile>
+  <mat-grid-tile><button mat-fab color="warn" (click)="gameType = 'sort-it'"><mat-icon>sort_by_alpha</mat-icon></button></mat-grid-tile>
+</mat-grid-list>
+<button class="right" mat-mini-fab *ngIf="gameType" (click)="gameType = ''"><mat-icon>exit_to_app</mat-icon></button>
+<app-multiple-choice *ngIf="gameType == 'multiple-choice'" [numberOfChallenges]="20" [words]="words"></app-multiple-choice>
+<app-sort-it *ngIf="gameType == 'sort-it'" [numberOfChallenges]="20" [words]="words"></app-sort-it>

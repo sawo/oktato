@@ -10,6 +10,7 @@ import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-b
 import { MultipleChoiceComponent } from './multiple-choice/multiple-choice.component';
 import { SortItComponent } from './sort-it/sort-it.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     MatIconModule,
     MatProgressBarModule,
     BrowserAnimationsModule,
-    DragDropModule
+    DragDropModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

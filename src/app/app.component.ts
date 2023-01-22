@@ -8,6 +8,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class AppComponent implements OnInit {
   public words: any;
+  public gameType: string = '';
 
   public constructor(private httpClient: HttpClient) {}
 

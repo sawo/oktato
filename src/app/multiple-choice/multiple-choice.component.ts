@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
@@ -7,8 +6,7 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
   templateUrl: './multiple-choice.component.html',
   styleUrls: ['./multiple-choice.component.css']
 })
-export class MultipleChoiceComponent implements OnInit {
-
+export class MultipleChoiceComponent {
 
   @Input()
   public numberOfChallenges: number | undefined;
@@ -29,14 +27,6 @@ export class MultipleChoiceComponent implements OnInit {
   public correctGuesses = 0;
   public voted: boolean = false;
   private timeout: any;
-
-  public constructor(private httpClient: HttpClient) {
-
-  }
-
-  ngOnInit() {
-  }
-
 
   private randomIntFromInterval(min: number, max: number): number { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)

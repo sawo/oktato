@@ -1,1 +1,29 @@
-<p>sort-it works!</p>
+<div class="container">
+  <h1>Rendezd sorba az alábbi szavakat!</h1>
+
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let word of challenge" cdkDrag>
+      <button style="margin: 5px;" mat-raised-button color="primary">{{word}}</button>
+    </div>
+  </div>
+  <button mat-raised-button color="accent" (click)="validateOrder()">Ellenőrzés</button>
+  <div *ngIf="result !== ''">
+    <br>
+    <span *ngIf="result === 'helyes'"><strong>A válasz helyes!</strong></span>
+    <div *ngIf="result === 'helytelen'">
+      A válasz rossz! <br>
+      A helyes megoldás: <strong>{{challengeOrdered}}</strong>
+      <div class="actions">
+        <button mat-raised-button color="accent" (click)="restart()">tovább ...</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+  <mat-progress-bar mode="determinate" [value]="showPercent(correctGuesses, totalGuesses)"></mat-progress-bar>
+  <p class="center">
+    {{correctGuesses}} / {{totalGuesses}} ({{showPercent(correctGuesses, totalGuesses) | number:'1.0-0'}}%)
+  </p>
+</div>

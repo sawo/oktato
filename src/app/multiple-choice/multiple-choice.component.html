@@ -1,9 +1,3 @@
-<p class="center">
-  <button mat-raised-button color="warn" (click)="gameType = 'multiple-choice'"><mat-icon>check</mat-icon></button>
-  &ngsp;
-  <button mat-raised-button color="warn" (click)="gameType = 'sort-it'"><mat-icon>sort_by_alpha</mat-icon></button>
-</p>
-
 <div class="container" *ngIf="gameType == 'multiple-choice'">
   <h1>Melyik szó van előbb az abc-ben? Válaszd ki!</h1>
   <div class="button-wrapper center">
@@ -12,7 +6,7 @@
     </span>
   </div>
   <div class="actions">
-    <button mat-raised-button color="warn" *ngIf="result === 'helytelen'" (click)="restart()">Újat kérek!</button>
+    <button mat-raised-button color="warn" *ngIf="result === 'helytelen'" (click)="restart()">tovább ...</button>
   </div>
 
   <div *ngIf="result !== ''">
@@ -20,27 +14,6 @@
     <span *ngIf="result === 'helyes'"><strong>A válasz helyes!</strong></span>
     <span
       *ngIf="result === 'helytelen'">A válasz rossz! A helyes megoldás: <strong>{{challengeOrdered[0]}}</strong></span>
-  </div>
-
-</div>
-
-<div class="container" *ngIf="gameType == 'sort-it'">
-  <h1>Melyik szó van előbb az abc-ben? Válaszd ki!</h1>
-
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let word of challenge" cdkDrag>
-      <button style="margin: 5px;" mat-raised-button color="primary">{{word}}</button>
-    </div>
-  </div>
-  <button mat-raised-button color="warn" (click)="validateOrder()">Ellenőrzés</button>
-  <div *ngIf="result !== ''">
-    <br>
-    <span *ngIf="result === 'helyes'"><strong>A válasz helyes!</strong></span>
-    <span
-      *ngIf="result === 'helytelen'">A válasz rossz! <br>
-      A helyes megoldás: <strong>{{challengeOrdered}}</strong>
-      <br>A te sorrended: {{challenge}}
-    </span>
   </div>
 
 </div>
