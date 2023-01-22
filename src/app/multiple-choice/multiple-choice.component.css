@@ -1,0 +1,24 @@
+#start {
+  margin: 20% auto;
+}
+
+.container {
+  margin: 20px;
+}
+
+.actions {
+  margin: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+.button-wrapper {
+  display: flex;
+}
+
+.button-wrapper span {
+  display: block;
+  maring: 5px;
+}
