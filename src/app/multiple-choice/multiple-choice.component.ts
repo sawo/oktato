@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {WordsService} from "../words.service";
 
 @Component({
   selector: 'app-multiple-choice',
@@ -8,18 +9,15 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 })
 export class MultipleChoiceComponent {
 
-  @Input()
-  public numberOfChallenges: number | undefined;
-
-  @Input()
-  set words(words: string[]) {
-    this._words = words;
-    this.generateChallenge(5);
+  constructor(wordsService: WordsService) {
+    wordsService.getWords().subscribe((words: any) => {
+      this._words = words.toString().split('\n');
+      this.generateChallenge(5);
+    });
   }
 
   private _words: string[] = [];
 
-  public gameType: string = 'multiple-choice';
   public challenge: string[] = [];
   public challengeOrdered: string[] = [];
   public result: string = '';

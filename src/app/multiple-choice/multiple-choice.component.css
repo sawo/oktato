@@ -15,10 +15,14 @@
 }
 
 .button-wrapper {
-  display: flex;
+  /*display: flex;*/
 }
 
 .button-wrapper span {
   display: block;
   margin: 5px;
+}
+
+button {
+  width: 100%;
 }

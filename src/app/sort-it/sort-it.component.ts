@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {WordsService} from "../words.service";
 
 @Component({
   selector: 'app-sort-it',
@@ -8,16 +9,16 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 })
 export class SortItComponent {
 
-  @Input()
-  public numberOfChallenges: number | undefined;
+  private _words: string[] = [];
 
-  @Input()
-  set words(words: string[]) {
-    this._words = words;
-    this.generateChallenge(5);
+  public constructor(wordsService: WordsService) {
+    wordsService.getWords().subscribe((response) => {
+      this._words = response.toString().split('\n');
+      this.generateChallenge(5);
+    });
   }
 
-  private _words: string[] = [];
+  public numberOfChallenges: number = 20;
 
   public gameType: string = 'multiple-choice';
   public challenge: string[] = [];
@@ -115,4 +116,3 @@ export class SortItComponent {
     this.voted = true;
   }
 }
-
